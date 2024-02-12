@@ -246,7 +246,7 @@ jQuery("#frmLogin").on("submit", function (e) {
 
 window.onload = function () {
   localStorage.clear();
-  if (window.innerWidth < 768 && window.location.pathname === "/index.html") {
+  if (window.innerWidth < 1024) {
     $("#popupModal").modal("show");
     // const body = document.querySelector('body');
     // body.style.display = 'none';
