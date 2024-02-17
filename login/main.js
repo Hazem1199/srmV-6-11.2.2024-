@@ -90,12 +90,25 @@ var count = 0;
 
 async function getdata() {
   const url = `https://script.google.com/macros/s/AKfycby74bvG7BwMd-CI4NsPUC_y2oB4PAKC7SH2q4aiHiR9hF1ZC3eMR5tKeNb0xx8cEk-r/exec`;
-  response = await fetch(url);
-  data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
   return data;
 }
 
-myButton.addEventListener("click", async () => {
+function saveUserData(user) {
+  const emp = {
+    username: user.Username,
+    password: user.Password,
+    role: user.Role,
+    Code: user.Code,
+  };
+
+  localStorage.setItem("myUser", user.Username);
+  localStorage.setItem("myCode", user.Code);
+  localStorage.setItem("myUserRole", emp.role);
+}
+
+function handleButtonClick() {
   show();
 
   if (username.value === "" || password.value === "") {
@@ -103,36 +116,36 @@ myButton.addEventListener("click", async () => {
     alert("Please enter both Username and Password");
     return;
   }
-  let users = await getdata();
 
-  users.forEach((user) => {
-    if (username.value === user.Username && password.value == user.Password) {
-      // alert('Done!');
-      let emp = {
-        username: user.Username,
-        password: user.Password,
-        role: user.Role,
-        Code: user.Code,
-      };
-      // console.log("test " + emp.username);
-      localStorage.setItem("myUser", emp.username);
-      localStorage.setItem("myCode", user.Code);
-      localStorage.setItem("myUserRole", emp.role);
-      correct = true;
-      return;
+  getdata().then((users) => {
+    let correct = false;
+
+    users.forEach((user) => {
+      if (username.value === user.Username && password.value == user.Password) {
+        saveUserData(user);
+        correct = true;
+        return;
+      }
+    });
+
+    if (correct) {
+      hide();
+      window.location.href = "/SRM.html";
+    } else {
+      hide();
+      alert("Incorrect Username or Password");
     }
-    count++;
-    console.log(count);
   });
+}
 
-  if (correct == true) {
-    hide();
-    window.location.href = "/SRM.html";
-  } else {
-    hide();
-    alert("incorrect Username or Password");
-  }
+myButton.addEventListener("click", handleButtonClick);
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  await getdata();
+  // displayLogin();
 });
+
 
 const passwordInput = document.querySelector("#password");
 const passwordEye = document.querySelector(".password-eye");
@@ -156,11 +169,7 @@ window.onunload = function () {
   null;
 };
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  await getdata();
-  // displayLogin();
-});
+
 
 const loginbtn = document.querySelector(".loginbtn");
 

@@ -52,7 +52,7 @@ const progressBar = document.getElementById("progress-bar");
 const level = document.getElementById("level");
 
 const welcome = document.querySelector(".Welcome");
-var userr = localStorage.getItem("myCode");
+const userr = localStorage.getItem("myCode");
 console.log(userr);
 
 welcome.innerHTML = `Welcome ${userr}!`;

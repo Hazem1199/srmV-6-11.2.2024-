@@ -1,4 +1,44 @@
 const shareSubmit = document.querySelector(".shareSubmit");
+const ShareEnd = document.querySelector(".ShareEnd");
+
+
+// const savedate = sessionStorage.getItem("ShareEnd");
+// if (savedate) {
+//   const data = JSON.parse(savedate);
+//   // Use the data to render the page
+
+//   ShareEnd.innerHTML = data.formattedFutureDate;
+// }
+
+// console.log("ShareEnd : " + sessionStorage.getItem("ShareEnd"));
+//     console.log("formattedFutureDate : " + data.formattedFutureDate);
+
+// function displayShareEnd() {
+//   const savedate = sessionStorage.getItem("ShareEnd");
+//   if (savedate) {
+//     const data = JSON.parse(savedate);
+//     // Use the data to render the page
+
+//     ShareEnd.innerHTML = data.formattedFutureDate;
+    
+//   }
+// }
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Add 30 days to the current date
+  const futureDate = new Date(currentDate);
+  futureDate.setDate(currentDate.getDate() + 30);
+
+  // Convert the future date to dd/mm/yyyy format
+  const formattedFutureDate = futureDate.toLocaleDateString("en-GB");
+
+  if (formattedFutureDate) {
+    // Display the result
+    ShareEnd.innerHTML = "share End : " + formattedFutureDate;
+  }
+
 
 shareSubmit.addEventListener("click", () => {
   // Get the id from session storage.
@@ -13,20 +53,9 @@ shareSubmit.addEventListener("click", () => {
     return;
   }
 
-  const ShareEnd = document.querySelector(".ShareEnd");
 
-  // Get the current date
-  const currentDate = new Date();
 
-  // Add 30 days to the current date
-  const futureDate = new Date(currentDate);
-  futureDate.setDate(currentDate.getDate() + 30);
-
-  // Convert the future date to dd/mm/yyyy format
-  const formattedFutureDate = futureDate.toLocaleDateString("en-GB");
-
-  // Display the result
-  ShareEnd.innerHTML = "share End : " + formattedFutureDate;
+  
 
   // Continue with the rest of the function code.
   const Timestamp = document.querySelector("#Timestamp3");

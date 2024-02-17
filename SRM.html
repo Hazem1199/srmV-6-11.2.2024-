@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
@@ -85,7 +85,7 @@
           <span class="tooltip">Group</span>
         </li>
         <li id="Settings">
-          <a href="#">
+          <a href="/task.html">
             <i class="bx bx-cog"></i>
             <span class="link_name">Settings</span>
           </a>
@@ -190,7 +190,8 @@
         <form class="searchCon flex-grow-1">
           <div class="alertMsg" id="alertMsg"></div>
           <div class="search p-relative">
-            <input style="border-radius: 40px 0px 0px 40px;" class="rad-15" type="search" id="searchInput" name="search" placeholder="Write ID...." required>
+            <input style="border-radius: 40px 0px 0px 40px;" class="rad-15" type="search" id="searchInput" name="search"
+              placeholder="Write ID...." required>
           </div>
           <div class="search-container">
             <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
@@ -279,8 +280,8 @@
         <!-- email btn  -->
 
         <button disabled id="emailBtnM" data-bs-toggle="modal" data-bs-target="#exampleModal4" type="submit"
-          class="btn button mx-1"><iconify-icon style="color: #C5221F;" class="qrIcon mx-1" icon="bi:envelope" width="23"
-            height="23"></iconify-icon>
+          class="btn button mx-1"><iconify-icon style="color: #C5221F;" class="qrIcon mx-1" icon="bi:envelope"
+            width="23" height="23"></iconify-icon>
           <p class="mb-0" style="color: black;">Email</p>
         </button>
 
@@ -468,7 +469,7 @@
                     </div>
 
                     <div class="form-group form-floating mt-3">
-                      <input name="Module Code" type="text" id="ModuleCodeSelect" class="form-control" required >
+                      <input name="Module Code" type="text" id="ModuleCodeSelect" class="form-control" required>
                       <label for="ModuleCodeSelect">Module Code</label>
                     </div>
 
@@ -498,7 +499,8 @@
                   </div>
 
                   <div class="form-group form-floating" style="display:none ;">
-                    <input name="End Share Date" type="text" placeholder="Student Num" id="EndShareDate" class="form-control">
+                    <input name="End Share Date" type="text" placeholder="Student Num" id="EndShareDate"
+                      class="form-control">
                     <label for="EndShareDate">Student Nu m</label>
                   </div>
 
@@ -526,8 +528,8 @@
         </div>
 
         <form method="POST" id="digitalId">
-          <button disabled id="digitalId" type="submit" class="btn button digitalIdBtn mx-1"><iconify-icon style="color: black;"
-              class="qrIcon mx-1" icon="bi:qr-code" width="23" height="23"></iconify-icon>
+          <button disabled id="digitalId" type="submit" class="btn button digitalIdBtn mx-1"><iconify-icon
+              style="color: black;" class="qrIcon mx-1" icon="bi:qr-code" width="23" height="23"></iconify-icon>
             <p class="mb-0">QR</p>
             <div id="spinner-container5"></div>
           </button>
@@ -547,8 +549,8 @@
         </form>
 
         <form method="POST" id="App">
-          <button disabled id="App" type="submit" class="btn button appBtn mx-2"><iconify-icon class="qrIcon mx-1" style="color: #F1B708;"
-              icon="ic:twotone-app-shortcut" width="23" height="23"></iconify-icon>
+          <button disabled id="App" type="submit" class="btn button appBtn mx-2"><iconify-icon class="qrIcon mx-1"
+              style="color: #F1B708;" icon="ic:twotone-app-shortcut" width="23" height="23"></iconify-icon>
             <p class="mb-0">App</p>
             <div id="spinner-container1"></div>
           </button>
@@ -590,7 +592,7 @@
           <!-- Start Overview -->
           <div class="overview bg-white rad-10 d-flex align-center">
             <div class="avatar-box txt-c p-20">
-                <!-- <iframe id="profile-pic" class="circle-container"  src="" frameborder="0" scrolling="no"   ></iframe> -->
+              <!-- <iframe id="profile-pic" class="circle-container"  src="" frameborder="0" scrolling="no"   ></iframe> -->
               <img id="profile-pic" class="rad-half mb-10" src="" alt="" />
               <h5 class="m-0 headName"></h5>
               <p class="c-grey mt-10" id="level"></p>
@@ -602,9 +604,9 @@
 
               <div dis. style="display: flex; justify-content: center;">
                 <button disabled id="cancel" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal7"
-                  class="btn button mx-1 mt-2"><iconify-icon style="color: red;" class="qrIcon mx-1"
-                    icon="bi:x-circle" width="23" height="23"></iconify-icon>
-                  <p class="mb-0" >Cancel</p>
+                  class="btn button mx-1 mt-2"><iconify-icon style="color: red;" class="qrIcon mx-1" icon="bi:x-circle"
+                    width="23" height="23"></iconify-icon>
+                  <p class="mb-0">Cancel</p>
                   <!-- <div id="spinner-container"></div> -->
                 </button>
               </div>
@@ -646,8 +648,8 @@
 
 
                         <div class="form-group mt-3 form-floating">
-                          <textarea name="Cancel Reason" class="form-control" placeholder="Nots" id="CancelReason" rows="10"
-                            required></textarea>
+                          <textarea name="Cancel Reason" class="form-control" placeholder="Nots" id="CancelReason"
+                            rows="10" required></textarea>
                           <label for="CancelReason" class="form-label">Write Reasons</label>
                         </div>
 
@@ -714,8 +716,8 @@
                       <span class="fName"> </span>
                     </div>
                     <div class="fs-14 pb-10">
-                      <span class="c-grey">Date Of Birth:</span>
-                      <span class="DOB"></span>
+                      <span class="c-grey">Student No:</span>
+                      <span class="ID"> </span>
                     </div>
                     <div class="fs-14 pb-10">
                       <span class="c-grey">Email:</span>
@@ -756,14 +758,14 @@
                 <div class="d-flex">
                   <div class="space-between">
                     <div class="fs-14 pb-10">
-                      <span class="c-grey">Student No:</span>
-                      <span class="ID"> </span>
+                      <span class="c-grey">Career :</span>
+                      <span class="Career"> </span>
                     </div>
                     <div class="fs-14 pb-10">
-                      <span class="c-grey ">ID Number:</span>
-                      <span class="IdNumber"></span>
+                      <span class="c-grey ">Study Type :</span>
+                      <span class="StudyType"></span>
                     </div>
-                    <div class="fs-14">
+                    <div class="fs-14 pb-10">
                       <span class="c-grey">Phone:</span>
                       <span class="Phone"></span>
                     </div>
@@ -772,14 +774,16 @@
 
                 <div class="d-flex">
                   <div class="space-between">
+
                     <div class="fs-14 pb-10">
-                      <span class="c-grey">Career :</span>
-                      <span class="Career"> </span>
+                      <span class="c-grey">Date Of Birth:</span>
+                      <span class="DOB"></span>
                     </div>
                     <div class="fs-14 pb-10">
-                      <span class="c-grey ">Study Type :</span>
-                      <span class="StudyType"></span>
+                      <span class="c-grey ">ID Number:</span>
+                      <span class="IdNumber"></span>
                     </div>
+
 
                   </div>
                 </div>
