@@ -219,6 +219,7 @@ async function showComplaint(id) {
     let exManagerCell = document.createElement('div');
     exManagerCell.classList.add('divTableCell');
     exManagerCell.textContent = complaint.exManager;
+    exManagerCell.style.direction = "rtl";
     row.appendChild(exManagerCell);
     let actionCell = document.createElement('div');
     actionCell.classList.add('divTableCell');

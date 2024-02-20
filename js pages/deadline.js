@@ -8,6 +8,7 @@ const frmDiv = document.querySelector(".frmDiv");
 const StudentNum = document.querySelector("#StudentNum");
 var userr = localStorage.getItem("myCode");
 const user = document.querySelector("#user");
+const alertMsg = document.querySelector(".alertMsg");
 
 async function getInfoDeadlines(id) {
   const baseUrl = `https://script.google.com/macros/s/AKfycbxTI9S1emlI6Vls1ZVLIDRCpPlxKEXf7mRTjc8XaG7zXsXAVAGfhLeTUfoTnCfYQ2LlAQ/exec`;
@@ -82,7 +83,6 @@ async function showDeadlines(id) {
             Pay Now
           </button>
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="alertMsg"></div>
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -122,11 +122,10 @@ async function showDeadlines(id) {
                         <input name="Deadline Date" type="text" placeholder="Amount" id="SelectDueDate" class="form-control"  value =${students[i]["Due Date"]} >
                         <label for="SelectDueDate">Amount</label>
                       </div>
-                      <div class="form-group form-floating"  style="display:none ;">
-                          <input name="user" type="text" placeholder="Student Num" id="user"   
-                            class="form-control">
-                          <label for="user">Student Num</label>
-                        </div>
+                      <div class="form-group form-floating mt-3" style="display:none ;">
+                      <input name="Employee" type="text" id="deadlineEmployee" class="form-control">
+                      <label for="deadlineEmployee">Employee</label>
+                    </div>
                       <div class="form-group form-floating" style="display:none ;">
                         <input name="Student NUM" type="text" placeholder="Amount" id="StudentNUM" class="form-control" >
                         <label for="StudentNUM">Amount</label>
@@ -152,7 +151,7 @@ async function showDeadlines(id) {
 
                       <div class="form-group mt-3 form-floating">
                         <textarea name="Note" class="form-control" placeholder="Nots" id="Textarea" rows="5"></textarea>
-                        <label for="Textarea" class="form-label">Nots</label>
+                        <label for="Textarea" class="form-label">Note</label>
                       </div>
                       <div class="my-3">
                         <div class="error-message"></div>
@@ -162,7 +161,7 @@ async function showDeadlines(id) {
                       </div>
                       <div class="d-flex justify-content-center ">
                         <button class="btn btn-primary scrollto btn-info text-light d-flex" id="btnSubmit"
-                          type="submit">Send<div id="spinner-container"></div></button>
+                          type="submit">submit<div id="spinner-container1"></div></button>
                       </div>
                   </form>
                 </div>
@@ -201,6 +200,7 @@ async function showDeadlines(id) {
         const ScholarshipToPass = sessionStorage.getItem("ScholarshipToPass");
         const ReceptionistToPass = sessionStorage.getItem("ReceptionistToPass");
         const groupToPass = sessionStorage.getItem("groupToPass");
+        const user = localStorage.getItem("myCode");
         const first = tableBody.firstChild;
 
         // Get the "SelectDueDate" element.
@@ -209,6 +209,7 @@ async function showDeadlines(id) {
         const StudentNUM = document.querySelector("#StudentNUM");
         const Scholarship = document.querySelector("#Scholarship");
         const Reception = document.querySelector("#Reception");
+        const deadlineEmployee = document.querySelector("#deadlineEmployee");
         const fresh = document.querySelector("#fresh");
         const StudyType = document.querySelector("#StudyType");
 
@@ -216,6 +217,7 @@ async function showDeadlines(id) {
         selectDueDate.value = students[i]["Due Date"];
         floatingInput.value = students[i].Amount;
         StudentNUM.value = id;
+        deadlineEmployee.value = user;
         Scholarship.value = ScholarshipToPass;
         Reception.value = ReceptionistToPass;
         StudyType.value = groupToPass;
@@ -458,6 +460,7 @@ async function showDeadlines(id) {
   //supmit  frmDeadlineEdit
   jQuery("#frmDeadlineEdit").on("submit", function (e) {
     e.preventDefault();
+
     jQuery.ajax({
       url: "https://script.google.com/macros/s/AKfycbyfXOwzmRZqfNg2IdrWjRRf0olXlQaUTDn2CVZ1-O1lOBFrC5KyX2epevu5DwUb9j-4ig/exec",
       type: "post",
@@ -510,11 +513,14 @@ async function showDeadlines(id) {
       },
       complete: function () {
         jQuery("#spinner-container").empty();
+        jQuery("#exampleModal1").modal("hide");
+        $("#exampleModal1").on("hidden.bs.modal", function (e) {
+          $(".modal-backdrop").remove();
+        });
       },
     });
   });
 
-  const alertMsg = document.querySelector(".alertMsg");
   jQuery("#frmSubmit").on("submit", function (e) {
     e.preventDefault();
     jQuery.ajax({
@@ -524,29 +530,35 @@ async function showDeadlines(id) {
       beforeSend: function () {
         var spinner =
           '<div class="text-center" style="margin-left: 5px;"><div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div></div>';
-        jQuery("#spinner-container").html(spinner);
+        jQuery("#spinner-container1").html(spinner);
       },
       success: function (result) {
-        jQuery("#frmSubmit")[0].reset();
-        // Display success message here
-        alertMsg.classList.add("alert", "alert-success");
+        const id = sessionStorage.getItem("idToPass");
+        if (id === null || id === "") {
+          alertMsg.classList.add("alert", "alert-danger");
+          alertMsg.innerHTML =
+            "<strong>Error!</strong> Please Enter Invalid Id .";
+          alertMsg.style.display = "block";
+        } else {
+          alertMsg.classList.remove("alert", "alert-danger");
+          alertMsg.classList.add("alert", "alert-success");
+          alertMsg.innerHTML =
+            "<strong>Success!</strong> Payment added successfully.";
+          alertMsg.style.display = "block";
+        }
         alertMsg.style.width = "25%";
         alertMsg.style.position = "fixed";
         alertMsg.style.top = "0";
-        alertMsg.style.left = "0";
+        alertMsg.style.left = "38%";
         alertMsg.style.margin = "20px";
         alertMsg.style.transition = "all 0.5s ease-in-out";
-        alertMsg.innerHTML =
-          "<strong>Success!</strong> Payment added successfully.";
-        alertMsg.style.display = "block";
         alertMsg.style.opacity = "0";
         setTimeout(function () {
           alertMsg.style.opacity = "1";
         }, 10);
         setTimeout(function () {
           alertMsg.style.display = "none";
-          location.reload();
-        }, 5000);
+        }, 2000);
       },
       error: function () {
         // Display error message here
@@ -568,7 +580,11 @@ async function showDeadlines(id) {
         }, 2000);
       },
       complete: function () {
-        jQuery("#spinner-container").empty();
+        jQuery("#spinner-container1").empty();
+        jQuery("#exampleModal").modal("hide");
+        $("#exampleModal").on("hidden.bs.modal", function (e) {
+          $(".modal-backdrop").remove();
+        });
       },
     });
   });
@@ -610,7 +626,6 @@ window.onload = function () {
 // <td>
 //           <img src="${student.Status === "paid" ? "../imgs/correct.png" : "./imgs/png-transparent-computer-icons-ok-miscellaneous-trademark-cross.png"}" alt="${student.Status}" style="width: 7%">
 //         </td>
-
 
 window.addEventListener("load", function () {
   if (

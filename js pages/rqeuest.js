@@ -194,6 +194,7 @@ async function showRequests(id) {
 
     let exManagerCell = document.createElement("div");
     exManagerCell.classList.add("divTableCell");
+    exManagerCell.style.direction = "rtl";
     exManagerCell.textContent = request.exManager;
     row.appendChild(exManagerCell);
 

@@ -211,14 +211,14 @@ async function showInvoice(value) {
       sendBtn.innerHTML = `
             <div class="d-flex " >
                 <form method="POST" class="frmSendInvoice">
-                <input type="text" name="Serial" id="Serial" value="${Invoices[i]["autoSerial "]}" style="display:none ;">
-                <input type="text" name="Timestamp" class ="Timestamp"  style="display:none ;"> 
-                <input type="text" name="Employee" class ="Employee" value="${userr}" style="display:none ;"> 
-                <input type="number" name="Student Num" class ="StudentNum" value="${id}" style="display:none ;"> 
-                    <button id="btnSend" type="submit" class="btn button btnSend mx-1">
-                    <p class="mb-0">Send</p>
-                    <div id="spinner-container1"></div>
-                  </button>
+                    <input type="text" name="Serial" id="Serial" value="${Invoices[i]["autoSerial "]}" style="display:none ;">
+                    <input type="text" name="Timestamp" class ="Timestamp"  style="display:none ;"> 
+                    <input type="text" name="Employee" class ="Employee" value="${userr}" style="display:none ;"> 
+                    <input type="number" name="Student Num" class ="StudentNum" value="${id}" style="display:none ;"> 
+                        <button id="btnSend" type="submit" class="btn button btnSend mx-1">
+                        <p class="mb-0">Send</p>
+                        <div id="spinner-container1"></div>
+                      </button>
                 </form>
 
                 <button id="printBtnn"  class="card-link btn btn-success mx-1" data-bs-toggle="modal" title="Print"
