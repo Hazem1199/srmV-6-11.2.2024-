@@ -47,6 +47,8 @@ async function displayTasks() {
 
     tableBody.innerHTML = "";
 
+    const Dep = localStorage.getItem("myDepartment");
+
     for (let i = 0; i < tasks.length; i++) {
       const task = {
         TaskNo: tasks[i].TaskNo,
@@ -58,7 +60,7 @@ async function displayTasks() {
         Days: tasks[i].Days,
         From: tasks[i].From,
         To: tasks[i].To,
-        TimeBeforeEnd: tasks[i]["TimeBef.End"], // Use optional chaining to avoid errors if TimeBef is undefined
+        TimeBeforeEnd: tasks[i]["TimeBef.End"],
       };
 
       // const formattedDate = new time(task.From).toLocaleDateString("en-GB");
@@ -71,91 +73,92 @@ async function displayTasks() {
         minute: "2-digit",
       });
 
-      const newRow = document.createElement("tr");
-      newRow.innerHTML = `
-        <td class="text-center">${task.TaskNo}</td>
-        <td style="direction: rtl " >${task.TaskName}</td>
-        <td>${task.Responsible}</td>
-        <td>${task.Days}</td>
-        <td>${formattedTime}</td>
-        <td>${formattedTime1}</td>
-        <td>
-        <div dis. style="display: flex; justify-content: center;">
-        <button id="cancel" type="submit" data-bs-toggle="modal" data-bs-target="#reportTask"
-          class="btn button mx-1 mt-2"><iconify-icon style="color: black;" class="qrIcon mx-1" icon="bi:folder-check"
-            width="23" height="23"></iconify-icon>
-          <p class="mb-0">Report</p>
-          <!-- <div id="spinner-container"></div> -->
-        </button>
-      </div>
-
-      <div class="modal fade" id="reportTask" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Please Write Your Reason
-              </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-              <form method="POST" id="frmCancel">
-                <div class="form-group form-floating mb-3 frmDiv ">
-
-
-                  <div class="form-group form-floating mt-3" style="display:none ;">
-                    <input name="Employee" type="text" id="Empcancel" class="form-control">
-                    <label for="smsEmployee">Employee</label>
+      // Add a condition to check if the task's department matches the stored department
+      if (task.Department === Dep) {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+        <td class="text-center align-middle d-flex align-items-center">
+        <div style="font-size: 14px;" class="fw-bold mx-1">
+            (${task.TaskNo})
+        </div>
+        <div style="direction: rtl" class="fw-bold">
+            ${task.TaskName}
+        </div>
+        <div class="d-flex ms-auto"> <!-- Use ml-auto to push the button to the end -->
+            <button id="repoet" type="submit" data-bs-toggle="modal" data-bs-target="#reportTask" toggle="tooltip" title="Report" class="btn justify-content-center align-items-center mx-1">
+                <iconify-icon style="color: #5cb85c; font-size: 20px" class="qrIcon mx-1" icon="bi:bookmark-check-fill" width="18" height="18"></iconify-icon>
+                <p class="mb-0"></p>
+                <!-- <div id="spinner-container"></div> -->
+            </button>
+        </div>
+  
+        <div class="modal fade" id="reportTask" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Please Write Your Reason
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+  
+                <form method="POST" id="frmCancel">
+                  <div class="form-group form-floating mb-3 frmDiv ">
+  
+  
+                    <div class="form-group form-floating mt-3" style="display:none ;">
+                      <input name="Employee" type="text" id="Empcancel" class="form-control">
+                      <label for="smsEmployee">Employee</label>
+                    </div>
                   </div>
-                </div>
-
-
-                <div class="form-group form-floating" style="display:none ;">
-                  <input name="Timestamp" type="text" placeholder="Scholarship" id="cancelTimestamp"
-                    class="form-control">
-                  <label for="Timestamp">Scholarship</label>
-                </div>
-
-
-                <div class="form-group form-floating" style="display:none ;">
-                  <input name="Student Num" type="number" placeholder="Scholarship" id="cancelId"
-                    class="form-control">
-                  <label for="qrCodeId">Scholarship</label>
-                </div>
-
-
-                <div class="form-group mt-3 form-floating">
-                  <textarea name="Cancel Reason" class="form-control" placeholder="Nots" id="CancelReason"
-                    rows="10" required></textarea>
-                  <label for="CancelReason" class="form-label">Write Your Note</label>
-                </div>
-
-
-                <div class="my-3">
-                  <div class="error-message"></div>
-                  <div dir="ltr" class="sent-message text-center alert alert-success d-none"></div>
-
-                </div>
-                <div class="d-flex justify-content-center mt-3">
-                  <button class="btn btn-primary scrollto btn-info text-light d-flex cancelBtn" type="submit">
-                    Submit
-                    <div id="spinner-container7"></div>
-                  </button>
-                </div>
-              </form>
+  
+  
+                  <div class="form-group form-floating" style="display:none ;">
+                    <input name="Timestamp" type="text" placeholder="Scholarship" id="cancelTimestamp"
+                      class="form-control">
+                    <label for="Timestamp">Scholarship</label>
+                  </div>
+  
+  
+                  <div class="form-group form-floating" style="display:none ;">
+                    <input name="Student Num" type="number" placeholder="Scholarship" id="cancelId"
+                      class="form-control">
+                    <label for="qrCodeId">Scholarship</label>
+                  </div>
+  
+  
+                  <div class="form-group mt-3 form-floating">
+                    <textarea name="Cancel Reason" class="form-control" placeholder="Nots" id="CancelReason"
+                      rows="10" required></textarea>
+                    <label for="CancelReason" class="form-label">Write Your Note</label>
+                  </div>
+  
+  
+                  <div class="my-3">
+                    <div class="error-message"></div>
+                    <div dir="ltr" class="sent-message text-center alert alert-success d-none"></div>
+  
+                  </div>
+                  <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-primary scrollto btn-info text-light d-flex cancelBtn" type="submit">
+                      Submit
+                      <div id="spinner-container7"></div>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-        </td>
-      `;
-
-      // Add the new row to the table body
-      if (task.TaskNo == "") {
-        newRow.style.display = "none";
+          </td>
+          <td class="text-center align-middle fw-bold" >${task.Responsible}</td>
+          <td class="text-center align-middle fw-bold" style="font-size: 10px ">${formattedTime}</td>
+          <td class="text-center align-middle fw-bold" style="font-size: 10px ">${formattedTime1}</td>
+        
+        `;
+        tableBody.appendChild(newRow);
       }
-      tableBody.appendChild(newRow);
     }
     // Hide the loading overlay once the requests are processed
     hide();

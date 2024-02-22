@@ -55,8 +55,6 @@ const welcome = document.querySelector(".Welcome");
 const userr = localStorage.getItem("myCode");
 console.log(userr);
 
-welcome.innerHTML = `Welcome ${userr}!`;
-
 // loading card
 
 // const spinner3 = document.getElementById('spinner3');
@@ -382,6 +380,7 @@ async function display(value) {
 window.addEventListener("load", function () {
   const savedProgressBarWidth = sessionStorage.getItem("progressBar");
   const savedLevel = sessionStorage.getItem("level");
+  welcome.innerHTML = `Welcome ${userr}!`;
 
   if (savedProgressBarWidth) {
     progressBar.style.width = savedProgressBarWidth;
@@ -439,8 +438,6 @@ const ModuleCodeSelect = document.querySelector("#ModuleCodeSelect");
 async function selectModule() {
   let getModule = await getOnlineShare();
   console.log("getModule : " + getModule);
-
-
 
   getModule.forEach((element) => {
     var modules = {
@@ -740,8 +737,6 @@ shareSubmit.addEventListener("click", () => {
   const userr = localStorage.getItem("myCode");
   const EndShareDate = document.querySelector("#EndShareDate");
 
-  
-
   // Check if the id is empty.
   if (!id) {
     // Return from the function to stop it from executing.
@@ -761,15 +756,15 @@ shareSubmit.addEventListener("click", () => {
 });
 
 // condetion for user role
-if (userRole === "Coordinator") {
-  const Resrevation = document.querySelector("#Resrevation");
-  const HR = document.querySelector("#HR");
-  const Settings = document.querySelector("#Settings");
-  user.style.display = "none";
-  Resrevation.style.display = "none";
-  HR.style.display = "none";
-  Settings.style.display = "none";
-}
+// if (userRole === "Coordinator") {
+//   const Resrevation = document.querySelector("#Resrevation");
+//   const HR = document.querySelector("#HR");
+//   const Settings = document.querySelector("#Settings");
+//   user.style.display = "none";
+//   Resrevation.style.display = "none";
+//   HR.style.display = "none";
+//   Settings.style.display = "none";
+// }
 
 const digitalIdBtn = document.querySelector(".digitalIdBtn");
 
@@ -1099,3 +1094,5 @@ window.addEventListener("load", function () {
     window.location.href = "index.html";
   }
 });
+
+console.log("myCode : " + sessionStorage.getItem("myCode"));
